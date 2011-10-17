@@ -1,3 +1,3 @@
 <?xml version="1.0"?>
-<livre id="4e99a6b14139e" titre="La vie"><created>2011-10-15 17:28:49</created><modified>2011-10-15 17:28:49</modified><intro><imageURL/><text>super&#xD;
-</text></intro></livre>
+<livres>
+<book id="4e9ca02707247" title="testes" status="2"><created>2011-10-17 23:37:43</created><modified>2011-10-17 23:37:43</modified><intro><imageURL/><text>tes</text></intro></book><book id="4e9ca6159be9b" title="test" status="2"><created>2011-10-18 00:03:01</created><modified>2011-10-18 00:03:01</modified><intro><text>test</text></intro></book><book id="4e9ca61db6a0c" title="sqdfqsdf" status="2"><created>2011-10-18 00:03:09</created><modified>2011-10-18 00:03:09</modified><intro><text>qsdf</text></intro></book></livres>

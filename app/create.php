@@ -2,7 +2,7 @@
 
 <div class="box-center">
 
-	<form method="post" action="?p=new" enctype="multipart/form-data">
+	<form method="post" action="?p=create" enctype="multipart/form-data">
 		<p>
 			<label for="title">Titre</label>
 			<input type="text" name="book[title]" id="title">

@@ -1,5 +1,4 @@
-<?php $livres = simplexml_load_file(XML_FILE, 'SimpleXMLElement', LIBXML_NOCDATA); ?>
-<?php var_dump($livres); ?>
+<?php $books = simplexml_load_file(XML_FILE, 'SimpleXMLElement', LIBXML_NOCDATA); ?>
 
 <h1 class="center">Bibliothèque</h1>
 
@@ -9,50 +8,57 @@
 	
 	<thead>
 		<tr>
-			<th>Titre</th>
+			<th class="table-title">Titre</th>
 			<th>Auteur</th>
-			<th>Création</th>
-			<th>Modification</th>
-			<th>Statut</th>
+			<th class="table-date">Création</th>
+			<th class="table-date">Modification</th>
+			<th class="table-status">Statut</th>
 			<th class="table-actions">Actions</th>
 		</tr>
 	</thead>
 
 	<tbody>
-		<tr>
-			<td>Les fourmis</td>
-			<td>Bernard Werber</td>
-			<td></td>
-			<td></td>
-			<td class="center"><span class="status-green">0</span></td>
-			<td class="center">
-				<a href="?p=view&id=1338" class="view" title="Consulter"></a>
-				<a href="?p=edit&id=1338" class="edit" title="Modifier"></a>
-				<a href="?p=export&id=1338" class="script" title="Exporter le fichier XML"></a>
-				<a href="?p=delete&id=1338" class="delete" title="Supprimer" data-controls-modal="modal-from-dom" data-backdrop="true" data-keyboard="true"></a>
-			</td>
-		</tr>
-		<?php foreach ($livres as $livre) : ?>
+		<?php if (count($books) === 0) : ?>
 			<tr>
-				<td><?php echo $livre->titre; ?></td>
-				<td></td>
-				<td><?php echo $livre->created; ?></td>
-				<td><?php echo $livre->modified; ?></td>
-				<td class="center"><span class="status-yellow">1</span></td>
-				<td class="center">
-					<a href="?p=view&id=<?php echo $livre->id; ?>" class="view" title="Consulter"></a>
-					<a href="?p=edit&id=<?php echo $livre->id; ?>" class="edit" title="Modifier"></a>
-					<a href="?p=export&id=<?php echo $livre->id; ?>" class="script" title="Exporter le fichier XML"></a>
-					<a href="?p=delete&id=<?php echo $livre->id; ?>" class="delete" title="Supprimer" data-controls-modal="modal-from-dom" data-backdrop="true" data-keyboard="true"></a>
-				</td>
+				<td colspan="6" class="info">Aucun livre</td>
 			</tr>
-		<?php endforeach; ?>
+		<?php else : ?>
+			<?php foreach ($books as $book) : ?>
+				<tr>
+					<td><?php echo $book['title']; ?></td>
+					<td><?php echo $book->author; ?></td>
+					<td><?php echo $book->created; ?></td>
+					<td><?php echo $book->modified; ?></td>
+					<td class="center">
+						<?php 
+							switch ($book['status']) {
+								case 0:
+									echo '<span class="status-green">0</span>';
+									break;
+								case 1:
+									echo '<span class="status-yellow">1</span>';
+									break;
+								case 2:
+									echo '<span class="status-red">2</span>';
+									break;
+							}
+						?>
+					</td>
+					<td class="center">
+						<a href="?p=read&id=<?php echo $book['id']; ?>" class="view" title="Consulter"></a>
+						<a href="?p=update&id=<?php echo $book['id']; ?>" class="edit" title="Modifier"></a>
+						<a href="?p=export&id=<?php echo $book['id']; ?>" class="script" title="Exporter le fichier XML"></a>
+						<a href="?p=delete&id=<?php echo $book['id']; ?>" class="delete" title="Supprimer" data-controls-modal="modal-from-dom" data-backdrop="true" data-keyboard="true"></a>
+					</td>
+				</tr>
+			<?php endforeach; ?>
+		<?php endif; ?>
 	</tbody>
 
 </table>
 
 <p>
-	<a href="?p=new">Créer un nouveau livre</a>
+	<a href="?p=create">Créer un nouveau livre</a>
 </p>
 
 <!-- confirmation popup -->
@@ -75,7 +81,7 @@
 <script >
 	
 	$(function() {
-		$("table").tablesorter({ sortList: [[1,0]] });
+		$("table").tablesorter({ sortList: [[0,0]] });
 	});
 
 </script>
