@@ -1,0 +1,30 @@
+<livre titre="toto">
+    <intro>       
+        <imageURL>tot/tat/tit/ds</imageURL>
+        <text>gdfgdfgfdgdfgfx</text> 
+    </intro>
+    <chapitre code="1">
+        <imageURL>tot/tat/tit/ds</imageURL>
+        <text>gdfgdfgfdgdfgfx</text>
+        <question>blbla?</question>
+        <choix>
+            <rep ref=235>ffefef</rep>
+            <rep ref=456>ffefef</rep>
+            <rep ref=1>ffefef</rep>
+        </choix>
+    </chapitre>
+    <chapitre code="2">
+        <imageURL>tot/tat/tit/ds</imageURL>
+        <text>gdfgdfgfdgdfgfx</text>
+        <question>blbla?</question>
+        <choix>
+            <rep ref=235>ffefef</rep>
+            <rep ref=456>ffefef</rep>
+            <rep ref=1>ffefef</rep>
+        </choix>
+    </chapitre>
+    <fin code=789>
+        <imageURL>tot/tat/tit/ds</imageURL>
+        <text>gdfgdfgfdgdfgfx</text>   
+    </fin>
+</livre>

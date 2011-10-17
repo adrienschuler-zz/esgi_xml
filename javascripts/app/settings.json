@@ -1,0 +1,35 @@
+{
+	"title": "Projet XML Jeux de Rôle - 5e PPA-AL",
+	"sub_title": "Le livre dont vous êtes le Héro",
+	"authors": [
+		"Ahcène Idinarene",
+		"Alain Janin-Manificat",
+		"Adrien Schuler"
+	],
+	"links": [{
+			"name": "jQuery",
+			"link": "http://jquery.com/",
+		}, {
+			"name": "jQuery templates",
+			"link": "http://api.jquery.com/jquery.tmpl/",
+		}, {
+			"name": "Lettering.js",
+			"link": "http://letteringjs.com/",
+		}, {
+			"name": "LESS",
+			"link": "http://lesscss.org/",
+		}, {
+			"name": "Wood texture by Beyond-Oddities",
+			"link": "http://beyond-oddities.deviantart.com/art/Local-Texture-Three-by-One-77137822",
+		}, {
+			"name": "Book textures by Jay Hilgert",
+			"link": "http://www.bittbox.com/freebies/free-high-res-texture-pack-the-anatomy-of-a-really-old-book",
+		}, {
+			"name": "Police Hilda Sonnenschein",
+			"link": "http://www.dafont.com/fr/hilda-sonnenschein.font",
+		}, {
+			"name": "Police Rochester",
+			"link": "http://www.google.com/webfonts/specimen/Rochester",
+		},
+	]
+}

@@ -1,0 +1,200 @@
+@font-face {
+	font-family: 'Hilda Sonnenschein';
+	src: url(http://dl.dropbox.com/u/8348124/Hilds___.ttf);
+}
+
+.transition (@param: @default-transition) {
+     -moz-transition: @param;
+       -o-transition: @param;
+  -webkit-transition: @param;
+          transition: @param;
+}
+
+@base-color: hsl(45, 10%, 50%);
+@black: hsl(0, 100%, 100%);
+@white: hsl(0, 100%, 100%);
+
+html {
+	overflow: hidden; 
+	height: 100%;
+ 	background: hsl(0, 100%, 100%);
+}
+body {
+	padding: 20px;
+	margin: 0 auto;
+ 	height: 100%;
+ 	width: 100%;
+	overflow: auto;
+	/*background-image: url(../../images/layout/background.jpg);*/
+	background-repeat: no-repeat;
+	background-position: center;
+	color: @base-color;
+}
+
+::-moz-selection{ background: hsl(0, 0%, 40%); color: @white; }
+::selection { background: hsl(0, 0%, 40%); color: @white; }
+
+h1,
+h2,
+h3,
+p,
+li,
+a,
+label,
+input,
+textarea {
+	font-family: 'Rochester', cursive;
+	font-style: normal;
+	font-weight: 400;
+	text-transform: none;
+	text-decoration: none;
+	line-height: 1.5;
+	color: @base-color;
+
+	text-shadow: 0 0px 1px hsl(0, 0%, 50%);
+}
+h1 { font-size: 36px; }
+h2 { font-size: 30px; }
+h3 { font-size: 24px; }
+h3 { text-decoration: underline; }
+a,
+p,
+li,
+label,
+input,
+textarea {
+	font-size: 22px;
+	letter-spacing: 0.1em;
+	word-spacing: 0.1em;
+}
+input,
+textarea { font-size: 18px; }
+ul { list-style: none; padding: 0; margin: 0; }
+a { 
+	text-decoration: none;
+	
+	.transition(
+		color 0.3s ease
+	);
+}
+a:visited { color: @base-color; }
+a:hover { color: hsl(0, 0%, 60%); text-decoration: underline; }
+a:active { position: relative; top: 1px; }
+
+nav { text-align: right; }
+
+label { 
+	display: block; 
+	float: inherit;
+	text-align: inherit;
+}
+
+table { width: 95%; }
+
+.view,
+.edit,
+.delete,
+.script,
+.status-green,
+.status-yellow,
+.status-red {
+	display: inline-block;
+	width: 16px;
+	height: 16px;
+	margin: 5px;
+	text-indent: -9999px;
+}
+.view { background: url(../../images/icons/view.png); }
+.edit { background: url(../../images/icons/edit.png); }
+.delete { background: url(../../images/icons/delete.png); }
+.script { background: url(../../images/icons/script-code.png); }
+.status-green { background: url(../../images/icons/status-green.png); }
+.status-yellow { background: url(../../images/icons/status-yellow.png); }
+.status-red { background: url(../../images/icons/status-red.png); }
+
+.header,
+.status-green,
+td .status-yellow,
+td .status-red { text-align: center; }
+
+.table-actions { width: 120px; }
+
+input[type=text],
+input[type=file],
+textarea {
+	width: 600px;
+}
+textarea {
+	height: 200px;
+}
+
+#book {
+
+	display: none;
+
+	.book-cover,
+	.book-inside,
+	.book-back {}	
+
+	.book-cover,
+	.book-back { width: 714px; height: 1024px; }
+	.book-cover {
+		background-image: url(../../images/layout/book-cover.png);
+		padding-bottom: 30px;
+		background-repeat: no-repeat;
+	}
+	.book-back {
+		background-image: url(../../images/layout/book-back.png);
+		padding-top: 30px;
+	}
+
+	.book-inside {
+		display: inline-block;
+		text-align: left;
+		background-image: url(../../images/layout/book-inside.png);
+		width: 1500px;
+		height: 1024px;
+
+		.code {
+			font-size: 12em;
+			font-family: 'Hilda Sonnenschein';
+			line-height: 0em;
+		}
+		.code,
+		.exposition,
+		.label,
+		.choix {
+			color: black; 
+			text-shadow: inherit;
+			display: none;
+		}
+		.exposition span {
+			display: none;
+		}
+		.label,
+		.code {
+			color: #222; 
+			text-align: center;
+		}
+		.label {
+			font-size: 2em;
+		}
+		.left-page,
+		.right-page {
+			display: inline-block;
+			margin-top: 100px;
+			width: 580px;
+			float: left;
+		}
+		.left-page {
+			margin-left: 120px;
+		}
+		.right-page {
+			margin-left: 80px;	
+		}
+	}
+}
+
+.center { text-align: center; }
+.block-center { margin: 0 auto; }
+
