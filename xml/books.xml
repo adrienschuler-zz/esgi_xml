@@ -1,3 +1,3 @@
 <?xml version="1.0"?>
-<livres>
-<book id="4e9ca02707247" title="testes" status="2"><created>2011-10-17 23:37:43</created><modified>2011-10-17 23:37:43</modified><intro><imageURL/><text>tes</text></intro></book><book id="4e9ca6159be9b" title="test" status="2"><created>2011-10-18 00:03:01</created><modified>2011-10-18 00:03:01</modified><intro><text>test</text></intro></book><book id="4e9ca61db6a0c" title="sqdfqsdf" status="2"><created>2011-10-18 00:03:09</created><modified>2011-10-18 00:03:09</modified><intro><text>qsdf</text></intro></book></livres>
+<books>
+<book id="4e9fd98d50707" title="Les fourmis" status="2" created="2011-10-20 10:19:25" modified="2011-10-20 10:19:25"><intro><text>Il &#xE9;tait une fois...</text></intro><chapter code="01" id="4e9fda0927c1d" status="2" created="2011-10-20 10:21:29" modified="2011-10-20 10:21:29"><imageURL/><text>Premier chapitre...</text><question>Que choisis-tu ?!!</question><choice><answer ref="02">&#x263A;</answer><answer ref="03">&#x263B;</answer></choice></chapter></book></books>

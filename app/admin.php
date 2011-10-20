@@ -27,8 +27,8 @@
 				<tr>
 					<td><?php echo $book['title']; ?></td>
 					<td><?php echo $book->author; ?></td>
-					<td><?php echo $book->created; ?></td>
-					<td><?php echo $book->modified; ?></td>
+					<td><?php echo $book['created']; ?></td>
+					<td><?php echo $book['modified']; ?></td>
 					<td class="center">
 						<?php 
 							switch ($book['status']) {

@@ -3,6 +3,7 @@
 class Book {
 	
 	var $file;
+	var $chapters = array();
 	
 
 	function __construct($book = null) {
@@ -26,8 +27,8 @@ class Book {
 		$livre->addAttribute('id', uniqid());
 		$livre->addAttribute('title', $book['title']);
 		$livre->addAttribute('status', 2);
-		$livre->addChild('created', $date);
-		$livre->addChild('modified', $date);
+		$livre->addAttribute('created', $date);
+		$livre->addAttribute('modified', $date);
 
 		$intro = $livre->addChild('intro');
 		//$intro->addChild('imageURL', $book['image']);
@@ -48,6 +49,10 @@ class Book {
 
 	function delete($id) {
 		
+	}
+
+	function addChapter($chap){
+		$this->chapters[] = $chap;
 	}
 
 

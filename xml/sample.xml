@@ -1,9 +1,9 @@
-<livre titre="toto">
+<book id="4e9ca02707247" title="testes" status="2" created="2011-10-17 23:37:43" modified="2011-10-17 23:37:43">
     <intro>       
         <imageURL>tot/tat/tit/ds</imageURL>
         <text>gdfgdfgfdgdfgfx</text> 
     </intro>
-    <chapitre code="1">
+    <chapitre code="1"  status="2" created="2011-10-17 23:37:43" modified="2011-10-17 23:37:43">
         <imageURL>tot/tat/tit/ds</imageURL>
         <text>gdfgdfgfdgdfgfx</text>
         <question>blbla?</question>
@@ -13,7 +13,7 @@
             <rep ref=1>ffefef</rep>
         </choix>
     </chapitre>
-    <chapitre code="2">
+    <chapitre code="2"  status="2" created="2011-10-17 23:37:43" modified="2011-10-17 23:37:43">
         <imageURL>tot/tat/tit/ds</imageURL>
         <text>gdfgdfgfdgdfgfx</text>
         <question>blbla?</question>
@@ -27,4 +27,4 @@
         <imageURL>tot/tat/tit/ds</imageURL>
         <text>gdfgdfgfdgdfgfx</text>   
     </fin>
-</livre>
+</book>

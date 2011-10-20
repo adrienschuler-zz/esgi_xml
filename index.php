@@ -9,5 +9,7 @@ define('XML_FILE', ROOT . 'xml/books.xml');
 
 require APP . 'user.class.php';
 require APP . 'book.class.php';
+require APP . 'chapter.class.php';
+
 
 require APP . 'index.php';
