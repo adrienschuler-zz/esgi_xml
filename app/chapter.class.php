@@ -6,10 +6,12 @@ class Chapter {
 	var $file;
 	var $chapter;
 
-	function __construct($book_id, $chapter = null) {
+	function __construct($book_id = null, $chapter = null) {
 		
 		$this->book = new Book();
-		$this->book = $this->book->read($book_id);
+		if ($book_id) {
+			$this->book = $this->book->read($book_id);
+		}
 		$this->file = simplexml_load_file(XML_FILE);
 		$this->chapter = $chapter;
 		if ($chapter && $this->check()) {
@@ -80,7 +82,8 @@ class Chapter {
 	}
 
 	function read($id) {
-		return $this->book->read($book_id)->xpath("chapter[@id='$id']");
+		$chapter = $this->file->xpath("//*/chapter[@id='$id']");
+		return $chapter[0];
 	}
 
 	function update($chapter) {

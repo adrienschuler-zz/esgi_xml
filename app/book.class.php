@@ -4,6 +4,7 @@ class Book {
 	
 	var $file;
 	var $book;
+	var $id;
 	
 
 	function __construct($book = null) {
@@ -66,6 +67,7 @@ class Book {
 
 	function read($id) {
 		$book = $this->file->xpath("book[@id='$id']");
+		$this->id = $book[0]['id'];
 		$this->chapters = $this->file->xpath("book[@id='$id']/chapter");
 		return $book[0];
 	}
@@ -82,5 +84,30 @@ class Book {
 		return $this->chapters;
 	}
 
+	function ParagUsedNCreated()
+	{
+		//Recupere le tableau des paragraphes[references] utilisés
+		$parags = $this->file->xpath("//book[@id='".$this->id."']//answer/@ref");
+		$paragUsed = array_unique($parags);
+		//Recupere le tableau des paragraphes[codes] créés
+		$paragCreated = $this->file->xpath("//book[@id='".$this->id."']//chapter/@code");
+		$parUsedNCreated = Array();
+
+		foreach($paragUsed as $pused)
+		{
+			$create=false;
+			foreach($paragCreated as $pcreated)
+			{
+				if(trim($pused)==trim($pcreated)) 
+					$create=true;			
+			}
+			if(!$create) 
+			{	
+				array_push($parUsedNCreated, $pused);					
+			}
+		}	
+		$idUsedNCreated=array_unique($parUsedNCreated);
+		return $idUsedNCreated;	
+	}
 
 }

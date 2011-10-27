@@ -21,22 +21,23 @@
 		<div class="fill">
 			<div class="container">
 				<h1 class="brand">ESGI - Projet XML</h1>
-				<div class="credentials">
-					<p>
-						Vous êtes connecté en tant que . 
-						<a href="?p=logout">Déconnexion</a>
-					</p>
-				</div>
+				<p>
+					Vous êtes connecté en tant que "unknow". 
+					<a href="?p=logout">Déconnexion</a>
+				</p>
 			</div>
 		</div>
 	</div>
 
-	<?php 
-		if (isset($_GET['p'])) {
-			require APP . $_GET['p'] . '.php';
-		} else {
-			require APP . 'admin.php';
-		}
-	?>
+	<div class="container">
+		<?php 
+			if (isset($_GET['p'])) {
+				require APP . $_GET['p'] . '.php';
+			} else {
+				require APP . 'admin.php';
+			}
+		?>
+	</div>
+
 </body>
 </html>

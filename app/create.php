@@ -22,8 +22,8 @@
 			<div id="valid_intro" style="display:none">✓</div>
 		</p>
 
-		<input type="submit" name="submit" value="Créer" class="btn primary" disabled="disabled" id="create_but">
 		<a href="?p=admin" class="btn">Retour</a>
+		<input type="submit" name="submit" value="Créer" class="btn primary" disabled="disabled" id="create_but">
 
 	</form>
 
