@@ -90,6 +90,7 @@ label {
 
 table { width: 95%; }
 
+.create,
 .view,
 .edit,
 .delete,
@@ -103,6 +104,7 @@ table { width: 95%; }
 	margin: 5px;
 	text-indent: -9999px;
 }
+.create { background: url(../../images/icons/new.png); }
 .view { background: url(../../images/icons/view.png); }
 .edit { background: url(../../images/icons/edit.png); }
 .delete { background: url(../../images/icons/delete.png); }
@@ -200,3 +202,31 @@ textarea {
 .center { text-align: center; }
 .block-center { margin: 0 auto; }
 .info { text-align: center; font-style: italic; }
+
+a.btn { width: 35px; }
+
+.form_error:after {
+	color: red;
+	content: "✗";
+}
+.form_ok:after {
+	color: green;
+	content: "✓";
+}
+
+.topbar .brand {
+	float: left;
+	display: inline;
+	margin: 5px 0;
+	padding: 5px;
+	font-size: 30px;
+}
+.credentials {
+	float: right;
+	display: inline;
+	margin: 0;
+
+	p, a {
+		font-size: 18px;
+	}
+}

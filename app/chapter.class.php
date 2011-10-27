@@ -4,21 +4,53 @@ class Chapter {
 
 	var $book;
 	var $file;
+	var $chapter;
 
 	function __construct($book_id, $chapter = null) {
 		
 		$this->book = new Book();
 		$this->book = $this->book->read($book_id);
-		$this->book = $this->book[0];
 		$this->file = simplexml_load_file(XML_FILE);
-	
-		if ($chapter && $this->check($chapter)) {
-			$this->create($chapter);
+		$this->chapter = $chapter;
+		if ($chapter && $this->check()) {
+			$this->create($this->chapter);
 		}
 	}
 
-	function check($chapter) {
-		// TODO: vérifications
+	function check() {
+
+		$this->chapter['number']=(int)$this->chapter['number'];
+		$target_path = IMAGE_PATH . basename($_FILES['chap']['name']['image']);
+
+		if(move_uploaded_file($_FILES['chap']['tmp_name']['image'], $target_path)) {
+			echo "The file ".  basename($_FILES['chap']['name']['image']). 
+			" has been uploaded";
+		} else{
+			echo "There was an error uploading the file, please try again!";
+			if($_FILES['chap']['error']['image'])
+			{
+				switch ($_FILES['chap']['error']['image'])
+				{
+					case 1: // UPLOAD_ERR_INI_SIZE
+						echo "Le fichier depasse la limite autorisee par le serveur (fichier php.ini) !";
+						break;
+					case 2: // UPLOAD_ERR_FORM_SIZE
+						echo "Le fichier depasse la limite autorisee dans le formulaire HTML !";
+						break;
+					case 3: // UPLOAD_ERR_PARTIAL
+						echo "L'envoi du fichier a ete interrompu pendant le transfert !";
+						break;
+					case 4: // UPLOAD_ERR_NO_FILE
+						echo "Le fichier que vous avez envoyé a une taille nulle !";
+						break;
+				}
+			}
+			return false;
+		}
+
+		for ($i=0; $i < sizeof($this->chapter['choixRef']); $i++) {
+			$this->chapter['choixRef'][$i] = (int)$this->chapter['choixRef'][$i];
+		}
 
 		return true;
 	}
@@ -32,7 +64,7 @@ class Chapter {
 		$chap->addAttribute('status', 2);
 		$chap->addAttribute('created', $date);
 		$chap->addAttribute('modified', $date);
-		$chap->addChild('imageURL', $chapter['image']);
+		$chap->addChild('imageURL', $_FILES['chap']['name']['image']);
 		$chap->addChild('text', $chapter['text']);
 		$chap->addChild('question', $chapter['question']);
 		$choice = $chap->addChild('choice');
@@ -44,7 +76,7 @@ class Chapter {
 		
 		$this->file->asXML(XML_FILE);
 
-		header('Location:?p=admin');
+		header("Location:?p=update&id=" . $this->book['id']);
 	}
 
 	function read($id) {

@@ -26,9 +26,9 @@
 			<?php foreach ($books as $book) : ?>
 				<tr>
 					<td><?php echo $book['title']; ?></td>
-					<td><?php echo $book->author; ?></td>
-					<td><?php echo $book['created']; ?></td>
-					<td><?php echo $book['modified']; ?></td>
+					<td class="center"><?php echo $book->author; ?></td>
+					<td class="center"><?php echo $book['created']; ?></td>
+					<td class="center"><?php echo $book['modified']; ?></td>
 					<td class="center">
 						<?php 
 							switch ($book['status']) {
@@ -76,12 +76,8 @@
   </div>
 </div>
 
-<script src="javascripts/plugins/jquery.tablesorter.min.js"></script>
-<script src="javascripts/plugins/twitter-bootstrap-1.3/bootstrap-modal.js"></script>
 <script >
-	
 	$(function() {
 		$("table").tablesorter({ sortList: [[0,0]] });
 	});
-
 </script>

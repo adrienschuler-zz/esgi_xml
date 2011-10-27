@@ -7,15 +7,29 @@
 	<link href="http://fonts.googleapis.com/css?family=Rochester" rel="stylesheet">
 	<link href="stylesheets/libs/twitter-bootstrap-1.3/less/bootstrap.less" rel="stylesheet/less" media="all">
 	<link href="stylesheets/less/styles.less" rel="stylesheet/less" media="all">
-	<!--<link href="vendors/mercury/stylesheets/mercury.bundle.css" rel="stylesheet" media="all">-->
 
 	<script src="javascripts/libs/less-1.1.3.min.js"></script>
 	<script src="javascripts/libs/jquery-1.6.4.min.js"></script>
 	<script src="javascripts/plugins/jquery.tmpl.min.js"></script>
 	<script src="javascripts/plugins/jquery.lettering.js"></script>
-	<!--<script src="vendors/mercury/javascripts/mercury_loader.js"></script>-->
+	<script src="javascripts/plugins/jquery.tablesorter.min.js"></script>
+	<script src="javascripts/plugins/twitter-bootstrap-1.3/bootstrap-modal.js"></script>
 </head>
 <body>
+
+	<div class="topbar">
+		<div class="fill">
+			<div class="container">
+				<h1 class="brand">ESGI - Projet XML</h1>
+				<div class="credentials">
+					<p>
+						Vous êtes connecté en tant que . 
+						<a href="?p=logout">Déconnexion</a>
+					</p>
+				</div>
+			</div>
+		</div>
+	</div>
 
 	<?php 
 		if (isset($_GET['p'])) {
@@ -24,6 +38,5 @@
 			require APP . 'admin.php';
 		}
 	?>
-
 </body>
 </html>

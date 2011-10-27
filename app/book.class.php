@@ -3,7 +3,7 @@
 class Book {
 	
 	var $file;
-	var $chapters = array();
+	var $book;
 	
 
 	function __construct($book = null) {
@@ -15,8 +15,33 @@ class Book {
 	}
 
 	function check($book) {
-		// TODO: vérifications
+		$target_path = IMAGE_PATH . basename($_FILES['book']['name']['image']); 
 
+		if(move_uploaded_file($_FILES['book']['tmp_name']['image'], $target_path)) {
+			echo "The file ".  basename($_FILES['book']['name']['image']). 
+			" has been uploaded";
+		} else{
+			echo "There was an error uploading the file, please try again!";
+			if($_FILES['book']['error']['image'])
+			{
+				switch ($_FILES['book']['error']['image'])
+				{
+					case 1: // UPLOAD_ERR_INI_SIZE
+						echo "Le fichier depasse la limite autorisee par le serveur (fichier php.ini) !";
+						break;
+					case 2: // UPLOAD_ERR_FORM_SIZE
+						echo "Le fichier depasse la limite autorisee dans le formulaire HTML !";
+						break;
+					case 3: // UPLOAD_ERR_PARTIAL
+						echo "L'envoi du fichier a ete interrompu pendant le transfert !";
+						break;
+					case 4: // UPLOAD_ERR_NO_FILE
+						echo "Le fichier que vous avez envoyé a une taille nulle !";
+						break;
+				}
+			}
+			return false;
+		}
 		return true;
 	}
 
@@ -31,7 +56,7 @@ class Book {
 		$livre->addAttribute('modified', $date);
 
 		$intro = $livre->addChild('intro');
-		//$intro->addChild('imageURL', $book['image']);
+		$intro->addChild('imageURL', $_FILES['book']['name']['image']);
 		$intro->addChild('text', $book['intro']);
 		
 		$this->file->asXML(XML_FILE);
@@ -40,7 +65,9 @@ class Book {
 	}
 
 	function read($id) {
-		return $this->file->xpath("book[@id='$id']");
+		$book = $this->file->xpath("book[@id='$id']");
+		$this->chapters = $this->file->xpath("book[@id='$id']/chapter");
+		return $book[0];
 	}
 
 	function update($book) {
@@ -51,8 +78,8 @@ class Book {
 		
 	}
 
-	function addChapter($chap){
-		$this->chapters[] = $chap;
+	function getChapters() {
+		return $this->chapters;
 	}
 
 
