@@ -5,13 +5,20 @@
 	$chapters_to_do = $B->ParagUsedNCreated();
 ?>
 
-<h1 class="center">Modification du livre "<?php echo $book['title']; ?>"</h1>
+<div class="page-header">
+	<h2>Modification du livre <u><?php echo $book['title']; ?></u></h2>
+</div>
+
+<?php display_messages(); ?>
 
 <p>
-	<a href="?p=update_intro">Modifier l'introduction</a>
+	<a href="?p=update_intro">Modifier l'introduction</a> &nbsp;|&nbsp;
+	<a href="?p=create_chapter&id=<?php echo $book['id']; ?>">Créer un nouveau chapitre</a>
 </p>
 
-<p>Chapitres :</p>
+<hr>
+
+<p class="info">Liste des chapitres :</p>
 
 <table class="zebra-striped">
 	
@@ -48,7 +55,9 @@
 
 </table>
 
-<p>Chapitres à créer :</p>
+<hr>
+
+<p class="info">Chapitres à créer :</p>
 
 <table class="zebra-striped">
 	
@@ -78,9 +87,7 @@
 
 </table>
 
-<p>
-	<a href="?p=create_chapter&id=<?php echo $book['id']; ?>">Créer un nouveau chapitre</a>
-</p>
+<hr>
 
 <a href="?p=admin" class="btn">Retour</a>
 

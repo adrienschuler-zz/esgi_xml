@@ -1,6 +1,12 @@
-<h1>Création d'un livre</h1>
+<div class="page-header">
+	<h2>Création d'un livre</h2>
+</div>
+
+<?php display_messages(); ?>
 
 <div class="box-center">
+
+	<p class="info">Commencez par saisir le titre de votre livre, ainsi qu'une image et un texte d'introduction.</p>
 
 	<form method="post" action="?p=create" enctype="multipart/form-data">
 		<p>
@@ -22,8 +28,12 @@
 			<div id="valid_intro" style="display:none">✓</div>
 		</p>
 
-		<a href="?p=admin" class="btn">Retour</a>
-		<input type="submit" name="submit" value="Créer" class="btn primary" disabled="disabled" id="create_but">
+		<hr>
+
+		<div class="well">
+			<a href="?p=admin" class="btn">Retour</a>
+			<input type="submit" name="submit" value="Créer" class="btn primary" disabled="disabled" id="create_but">
+		</div>
 
 	</form>
 

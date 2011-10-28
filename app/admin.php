@@ -1,8 +1,18 @@
 <?php $books = simplexml_load_file(XML_FILE, 'SimpleXMLElement', LIBXML_NOCDATA); ?>
 
-<h1 class="center">Bibliothèque</h1>
+<div class="page-header">
+	<h2>Bibliothèque</h1>
+</div>
 
-<p>Liste des livres disponibles :</p>
+<?php display_messages(); ?>
+
+<p>
+	<a href="?p=create">Créer un nouveau livre</a>
+</p>
+
+<hr>
+
+<p class="info">Liste des livres disponibles :</p>
 
 <table class="zebra-striped">
 	
@@ -26,7 +36,7 @@
 			<?php foreach ($books as $book) : ?>
 				<tr>
 					<td><?php echo $book['title']; ?></td>
-					<td class="center"><?php echo $book->author; ?></td>
+					<td class="center"><?php echo $book['author']; ?></td>
 					<td class="center"><?php echo $book['created']; ?></td>
 					<td class="center"><?php echo $book['modified']; ?></td>
 					<td class="center">
@@ -47,7 +57,7 @@
 					<td class="center">
 						<a href="?p=read&id=<?php echo $book['id']; ?>" class="view" title="Consulter"></a>
 						<a href="?p=update&id=<?php echo $book['id']; ?>" class="edit" title="Modifier"></a>
-						<a href="?p=export&id=<?php echo $book['id']; ?>" class="script" title="Exporter le fichier XML"></a>
+						<a href="?p=export&id=<?php echo $book['id']; ?>" class="script" title="Exporter le fichier XML" target="_blank"></a>
 						<a href="?p=delete&id=<?php echo $book['id']; ?>" class="delete" title="Supprimer" data-controls-modal="modal-from-dom" data-backdrop="true" data-keyboard="true"></a>
 					</td>
 				</tr>
@@ -56,10 +66,6 @@
 	</tbody>
 
 </table>
-
-<p>
-	<a href="?p=create">Créer un nouveau livre</a>
-</p>
 
 <!-- confirmation popup -->
 <div id="modal-from-dom" class="modal hide fade">

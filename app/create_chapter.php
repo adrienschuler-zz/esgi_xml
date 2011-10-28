@@ -3,7 +3,11 @@
 	$book = $book->read($_GET['id']);
 ?>
 
-<h1>Création d'un chapitre</h1>
+<div class="page-header">
+	<h2>Création d'un chapitre</h2>
+</div>
+
+<?php display_messages(); ?>
 
 <div class="box-center">
 
@@ -45,10 +49,12 @@
 			<div id="formChoiceDiv"></div
 		</p>
 
-		<br><br>
+		<hr>
 
-		<a href="?p=update&id=<?php echo $book['id']; ?>" class="btn">Retour</a>
-		<input type="submit" name="submit" value="Créer" disabled="disabled" class="btn primary" id="create_but">
+		<div class="well">
+			<a href="?p=update&id=<?php echo $book['id']; ?>" class="btn">Retour</a>
+			<input type="submit" name="submit" value="Créer" disabled="disabled" class="btn primary" id="create_but">
+		</div>
 
 	</form>
 
@@ -67,7 +73,7 @@ function createFormChoice(nbForm) {
 
 	for(var i = nbFormHere; i < nbForm; i++) {
 		var divFormElement = 	$('<div></div>'),
-			lRef = 				$('<label>Chapitre référencé :</label>'),
+			lRef = 				$('<hr><label>Chapitre référencé :</label>'),
 			inputRef = 			$('<input type=text name=chap[choixRef]['+i+'] class="choixRef" id=choixRef'+i+'>'),
 			valid_chapter_ref = $('<span id="choixRef'+i+'_error"></span>'),
 			lLibelle = 			$('<label>Libellé du choix :</label>'),

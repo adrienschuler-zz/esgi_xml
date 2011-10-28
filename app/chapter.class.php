@@ -78,6 +78,7 @@ class Chapter {
 		
 		$this->file->asXML(XML_FILE);
 
+		flash_message('success', 'Le chaptire <u>n° ' . $chapter['number'] . '</u> a bien été créé.', 'Pensez à créer les chaptires qu\'il réfère.');
 		header("Location:?p=update&id=" . $this->book['id']);
 	}
 

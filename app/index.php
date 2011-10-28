@@ -16,28 +16,51 @@
 	<script src="javascripts/plugins/twitter-bootstrap-1.3/bootstrap-modal.js"></script>
 </head>
 <body>
-
+	<!-- nav -->
 	<div class="topbar">
 		<div class="fill">
 			<div class="container">
-				<h1 class="brand">ESGI - Projet XML</h1>
-				<p>
-					Vous êtes connecté en tant que "unknow". 
-					<a href="?p=logout">Déconnexion</a>
-				</p>
+				<a class="brand" href="?p=admin">Projet XML</a>
+				<div class="credentials">
+					<p>
+						<?php if (isset($_SESSION['user'])) : ?>
+							Vous êtes connecté en tant que <?php echo $_SESSION['user']['login']; ?>&nbsp;&nbsp;
+							<a href="?p=logout">Déconnexion</a>
+						<?php else : ?>
+							Vous n'êtes pas identifé.&nbsp;&nbsp;
+							<a href="?p=login">Connexion</a>
+							ou&nbsp; 
+							<a href="?p=register">Inscription</a>
+						<?php endif; ?>
+					</p>
+				</div>
 			</div>
 		</div>
 	</div>
 
-	<div class="container">
-		<?php 
+	<div class="content">
+		<?php
+			check_session();
+
 			if (isset($_GET['p'])) {
-				require APP . $_GET['p'] . '.php';
+				$file = APP . $_GET['p'] . '.php';
+				if (file_exists($file)) {
+					require $file;
+				}
 			} else {
 				require APP . 'admin.php';
 			}
 		?>
 	</div>
+
+	<footer>
+		<p>
+			ESGI - 5PPA - AL<br><br>
+			Ahcéne IDINARENE<br>
+			Alain JANIN-MANIFICAT<br>
+			Adrien SCHULER<br>
+		</p>
+	</footer>
 
 </body>
 </html>

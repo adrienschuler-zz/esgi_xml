@@ -53,6 +53,7 @@ class Book {
 		$livre->addAttribute('id', uniqid());
 		$livre->addAttribute('title', $book['title']);
 		$livre->addAttribute('status', 2);
+		$livre->addAttribute('author', $_SESSION['user']['login']);
 		$livre->addAttribute('created', $date);
 		$livre->addAttribute('modified', $date);
 
@@ -62,6 +63,7 @@ class Book {
 		
 		$this->file->asXML(XML_FILE);
 
+		flash_message('success', 'Création du livre <u>' . $book['title'] . '</u> réussi !', 'Vous pouvez dès à présent le compléter via le bouton d\'édition (<span class="edit"></span>).');
 		header('Location:?p=admin');
 	}
 
