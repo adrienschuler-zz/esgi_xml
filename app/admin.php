@@ -34,31 +34,27 @@
 			</tr>
 		<?php else : ?>
 			<?php foreach ($books as $book) : ?>
+				<?php 
+					$b = new Book();
+					$b->read($book['id']);
+				?>
 				<tr>
 					<td><?php echo $book['title']; ?></td>
 					<td class="center"><?php echo $book['author']; ?></td>
 					<td class="center"><?php echo $book['created']; ?></td>
 					<td class="center"><?php echo $book['modified']; ?></td>
 					<td class="center">
-						<?php 
-							switch ($book['status']) {
-								case 0:
-									echo '<span class="status-green">0</span>';
-									break;
-								case 1:
-									echo '<span class="status-yellow">1</span>';
-									break;
-								case 2:
-									echo '<span class="status-red">2</span>';
-									break;
-							}
-						?>
+						<?php if (count($b->ParagUsedNCreated()) == 0) : ?>
+							<span class="status-green">0</span>
+						<?php else : ?>
+							<span class="status-red">1</span>
+						<?php endif; ?>
 					</td>
 					<td class="center">
 						<a href="?p=read&id=<?php echo $book['id']; ?>" class="view" title="Consulter"></a>
 						<a href="?p=update&id=<?php echo $book['id']; ?>" class="edit" title="Modifier"></a>
 						<a href="?p=export&id=<?php echo $book['id']; ?>" class="script" title="Exporter le fichier XML" target="_blank"></a>
-						<a href="?p=delete&id=<?php echo $book['id']; ?>" class="delete" title="Supprimer" data-controls-modal="modal-from-dom" data-backdrop="true" data-keyboard="true"></a>
+						<a href="?p=delete&id=<?php echo $book['id']; ?>" class="delete" title="Supprimer" data-id="<?php echo $book['id']; ?>"></a>
 					</td>
 				</tr>
 			<?php endforeach; ?>
@@ -77,13 +73,34 @@
     <p>Confirmer la suppression du livre</p>
   </div>
   <div class="modal-footer">
-    <a href="#" class="btn primary">Supprimer</a>
-    <a href="#" class="btn secondary">Annuler</a>
+    <a href="#" class="btn primary delete-button">Supprimer</a>
+    <a href="#" class="btn secondary cancel">Annuler</a>
   </div>
 </div>
 
 <script >
 	$(function() {
-		$("table").tablesorter({ sortList: [[0,0]] });
+		var popup = $('#modal-from-dom').modal({
+	        backdrop: true,
+	        closeOnEscape: true,
+	    	modal: true
+	    });
+
+		$('table').tablesorter({ sortList: [[0,0]] });
+
+		$('.delete').click(function() {
+			popup.modal('show');
+			$.data(popup, 'id', $(this).attr('data-id'));
+			$.data(popup, 'url', $(this).attr('href'));
+			return false;
+		});
+
+		$('.cancel').click(function() {
+			popup.modal('hide');
+		});
+
+		$('.delete-button').click(function() {
+			$(location).attr('href', $.data(popup, 'url'));
+		});
 	});
 </script>

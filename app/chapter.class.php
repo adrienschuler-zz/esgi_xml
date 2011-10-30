@@ -23,33 +23,33 @@ class Chapter {
 
 		$this->chapter['number']=(int)$this->chapter['number'];
 		$target_path = IMAGE_PATH . basename($_FILES['chap']['name']['image']);
-
-		if(move_uploaded_file($_FILES['chap']['tmp_name']['image'], $target_path)) {
-			echo "The file ".  basename($_FILES['chap']['name']['image']). 
-			" has been uploaded";
-		} else{
-			echo "There was an error uploading the file, please try again!";
-			if($_FILES['chap']['error']['image'])
-			{
-				switch ($_FILES['chap']['error']['image'])
+		if($_FILES['chap']['name']['image']!=""){
+			if(move_uploaded_file($_FILES['chap']['tmp_name']['image'], $target_path)) {
+				echo "The file ".  basename($_FILES['chap']['name']['image']). 
+				" has been uploaded";
+			} else{
+				echo "There was an error uploading the file, please try again!";
+				if($_FILES['chap']['error']['image'])
 				{
-					case 1: // UPLOAD_ERR_INI_SIZE
-						echo "Le fichier depasse la limite autorisee par le serveur (fichier php.ini) !";
-						break;
-					case 2: // UPLOAD_ERR_FORM_SIZE
-						echo "Le fichier depasse la limite autorisee dans le formulaire HTML !";
-						break;
-					case 3: // UPLOAD_ERR_PARTIAL
-						echo "L'envoi du fichier a ete interrompu pendant le transfert !";
-						break;
-					case 4: // UPLOAD_ERR_NO_FILE
-						echo "Le fichier que vous avez envoyé a une taille nulle !";
-						break;
+					switch ($_FILES['chap']['error']['image'])
+					{
+						case 1: // UPLOAD_ERR_INI_SIZE
+							echo "Le fichier depasse la limite autorisee par le serveur (fichier php.ini) !";
+							break;
+						case 2: // UPLOAD_ERR_FORM_SIZE
+							echo "Le fichier depasse la limite autorisee dans le formulaire HTML !";
+							break;
+						case 3: // UPLOAD_ERR_PARTIAL
+							echo "L'envoi du fichier a ete interrompu pendant le transfert !";
+							break;
+						case 4: // UPLOAD_ERR_NO_FILE
+							echo "Le fichier que vous avez envoyé a une taille nulle !";
+							break;
+					}
 				}
+				return false;
 			}
-			return false;
 		}
-
 		for ($i=0; $i < sizeof($this->chapter['choixRef']); $i++) {
 			$this->chapter['choixRef'][$i] = (int)$this->chapter['choixRef'][$i];
 		}

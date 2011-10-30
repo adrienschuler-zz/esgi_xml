@@ -12,7 +12,7 @@
 <?php display_messages(); ?>
 
 <p>
-	<a href="?p=update_intro">Modifier l'introduction</a> &nbsp;|&nbsp;
+	<a href="?p=update_intro&id=<?php echo $book['id']; ?>">Modifier l'introduction</a> &nbsp;|&nbsp;
 	<a href="?p=create_chapter&id=<?php echo $book['id']; ?>">Créer un nouveau chapitre</a>
 </p>
 
@@ -46,7 +46,7 @@
 						<a href="?p=read_chapter&id=<?php echo $chapter['id']; ?>" class="view" title="Consulter"></a>
 						<a href="?p=update_chapter&id=<?php echo $chapter['id']; ?>" class="edit" title="Modifier"></a>
 						<a href="?p=export_chapter&id=<?php echo $chapter['id']; ?>" class="script" title="Exporter le fichier XML" target="_blank"></a>
-						<a href="?p=delete_chapter&id=<?php echo $chapter['id']; ?>" class="delete" title="Supprimer" data-controls-modal="modal-from-dom" data-backdrop="true" data-keyboard="true"></a>
+						<a href="?p=delete_chapter&chapter_id=<?php echo $chapter['id']; ?>&book_id=<?php echo $book['id']; ?>" class="delete" title="Supprimer" data-book-id="<?php echo $book['id']; ?>" data-chapter-id="<?php echo $chapter['id']; ?>"></a>
 					</td>
 				</tr>
 			<?php endforeach; ?>
@@ -101,14 +101,36 @@
     <p>Confirmer la suppression du chapitre</p>
   </div>
   <div class="modal-footer">
-    <a href="#" class="btn primary">Supprimer</a>
-    <a href="#" class="btn secondary">Annuler</a>
+    <a href="#" class="btn primary delete-button">Supprimer</a>
+    <a href="#" class="btn secondary cancel">Annuler</a>
   </div>
 </div>
 
 <script >
 	$(function() {
-		$("table").tablesorter({ sortList: [[0,0]] });
+		var popup = $('#modal-from-dom').modal({
+	        backdrop: true,
+	        closeOnEscape: true,
+	    	modal: true
+	    });
+
+		$('table').tablesorter({ sortList: [[0,0]] });
+
+		$('.delete').click(function() {
+			popup.modal('show');
+			$.data(popup, 'book-id', $(this).attr('data-book-id'));
+			$.data(popup, 'chapter-id', $(this).attr('data-chapter-id'));
+			$.data(popup, 'url', $(this).attr('href'));
+			return false;
+		});
+
+		$('.cancel').click(function() {
+			popup.modal('hide');
+		});
+
+		$('.delete-button').click(function() {
+			$(location).attr('href', $.data(popup, 'url'));
+		});
 	});
 </script>
 
