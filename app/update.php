@@ -78,7 +78,7 @@
 				<tr>
 					<td class="center"><?php echo $id; ?></td>
 					<td class="center">
-						<a href="?p=create_chapter&id=<?php echo $book['id']; ?>&chap=<?php echo $id; ?>" class="create" title="Créer" target="_blank"></a>
+						<a href="?p=create_chapter&id=<?php echo $book['id']; ?>&chap=<?php echo $id; ?>" class="create" title="Créer"></a>
 					</td>
 				</tr>
 			<?php endforeach; ?>

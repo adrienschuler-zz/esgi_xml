@@ -13,9 +13,16 @@
 
 	<form method="post" action="?p=create_chapter&id=<?php echo $book['id']; ?>" enctype="multipart/form-data" value="8000000">
 
+		<div class="alert-message error" style="display:none;"></div>
+
 		<p>
 			<label for="number">Numéro du chapitre</label>
 			<input type="text"  onchange="checkNChapter();" name="chap[number]" id="number" value="<?php if (isset($_GET['chap'])) echo $_GET['chap']; ?>">
+
+			<?php if(isset($_GET['chap'])) : ?>
+				<input type="hidden" name="chap[number]" value="<?php if (isset($_GET['chap'])) echo $_GET['chap']; ?>">
+			<?php endif; ?>
+
 			<span id="number_error" class=""></span>
 		</p>
 		<p>
@@ -165,7 +172,9 @@ function checkNChapter()
 				var code = $(this).attr('code');
 				if(code==$('#number').val())
 				{
-					alert('Erreur : Le chapitre numéro '+code+' est déjà créé !');
+					$('.alert-message').html('<p><strong>Erreur !</strong> Le chapitre numéro '+code+' est déjà créé.</p><a class="close" href="#">×</a>');
+					$('.alert-message').show();
+
 					$('#number_error').removeClass('form_ok');
 					$('#number_error').addClass('form_error');
 					unlockCreation();
@@ -173,6 +182,7 @@ function checkNChapter()
 				}
 				else
 				{
+					
 					return false;
 				}
 		});			
@@ -190,4 +200,10 @@ function getUrlParameter(name) {
     }
     return false;
 }
+
+<?php if(isset($_GET['chap'])) : ?>
+	$('#number').trigger('change');
+	$('#number').attr('disabled', 'disabled');
+<?php endif; ?>
+
 </script>

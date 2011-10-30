@@ -14,6 +14,7 @@
 	<script src="javascripts/plugins/jquery.lettering.js"></script>
 	<script src="javascripts/plugins/jquery.tablesorter.min.js"></script>
 	<script src="javascripts/plugins/twitter-bootstrap-1.3/bootstrap-modal.js"></script>
+	<script src="javascripts/plugins/twitter-bootstrap-1.3/bootstrap-alert.js"></script>
 </head>
 <body>
 	<!-- nav -->
