@@ -19,11 +19,23 @@ $fTxt = fopen($fileTXT, "w+");
 	
 if($_GET['choice']== "download")
 {
-	telecharger($fileTXT);
+	if($_GET['file'] =="")
+	{
+		telecharger($fileTXT);
+	}else
+	{
+		telecharger($_GET['file']);
+	}
 }
 else if ($_GET['choice']== "consult")
 {
-	header("Location: $fileTXT");
+	if($_GET['file'] =="")
+	{
+		header("Location: $fileTXT");
+	}else
+	{
+		header("Location: ".$_GET['file']);
+	}
 }
 	
 function telecharger($filename)

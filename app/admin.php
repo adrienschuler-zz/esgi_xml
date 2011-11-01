@@ -54,7 +54,7 @@
 						<a href="?p=export&choice=consult&id=<?php echo $book['id']; ?>" class="view" title="Consulter"></a>
 						<a href="?p=update&id=<?php echo $book['id']; ?>" class="edit" title="Modifier"></a>
 						<a href="?p=download&choice=download&id=<?php echo $book['id']; ?>" class="script" title="Exporter le fichier XML" target="_blank"></a>
-						<a href="?p=delete&id=<?php echo $book['id']; ?>" class="delete" title="Supprimer" data-id="<?php echo $book['id']; ?>"></a>
+						<a href="?p=delete&id=<?php echo $book['id']; ?>" class="delete" title="Supprimer" data-id="<?php echo $book['id']; ?>" data-author="<?php echo $book['author']; ?>"></a>
 					</td>
 				</tr>
 			<?php endforeach; ?>
@@ -89,6 +89,17 @@
 		$('table').tablesorter({ sortList: [[0,0]] });
 
 		$('.delete').click(function() {
+
+			if ($(this).attr('data-author') !== "<?php echo $_SESSION['user']['login']; ?>") {
+				$('.alert-message')
+					.removeClass('success')
+					.addClass('error')
+					.html('<p><strong>Erreur de permission !</strong> La suppression d\un livre ne peut être effectué que par son auteur.</p><a class="close" href="#">×</a>')
+					.show();
+
+				return false;
+			}
+
 			popup.modal('show');
 			$.data(popup, 'id', $(this).attr('data-id'));
 			$.data(popup, 'url', $(this).attr('href'));

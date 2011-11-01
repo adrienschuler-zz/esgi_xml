@@ -12,6 +12,11 @@ $chapters = $B->getChapters();
 	<form method="post" action="#" enctype="multipart/form-data" value="8000000">
 	
 		<p>
+			<label> XPATH
+			<input type="text" name="xpath" style="width:250px;">
+			</label>
+		</p>
+		<p>
 			<label>Consulter l'indroduction ?
 			<input type="checkbox" name="introduction">
 			</label>
@@ -28,46 +33,55 @@ $chapters = $B->getChapters();
 		</p>
 		
 		<div class="well">
-			<a href="?p=admin" class="btn">Retour</a>
 			<input type="submit" name="submit" value="Afficher" class="btn primary" id="create_but">
+			<a href="?p=admin" class="btn">Retour</a>
 			
 		</div>
 	</form>
-	
 </div>
-
 <p class="content"> <b>Résultat :</b> </p>
-
 <div id="divResult">
 <?php
-	if (isset($_POST['submit'])) {
-		
-		if(isset($_POST["introduction"]))
+$f="";
+if (isset($_POST['submit'])) {
+	
+	if(isset($_POST["xpath"]) && !empty($_POST["xpath"]))
+	{
+		// XPATH
+		$file=$B->queryXPATH($_POST["xpath"]);
+		if($file !=null && ('' != file_get_contents($file)))
+		{		
+			$f=$file;
+			echo "Consulter votre résultat ci-dessous. Vous avez la possiblité de le télécharger sous format texte.";
+		}else
 		{
-			// Introduction
-			echo "<b>Introduction</b> <br/>";
-			echo "-------------------------------------------------------- <br/>";
-			$B->getIntroduction();
-			echo "<br/><br/>";
+			echo 'Aucun résultat trouvé.';
 		}
-		if(isset($_POST["chapter"]) && $_POST["chapter"] !=null)
+	}	
+	if(isset($_POST["introduction"]))
+	{
+		// Introduction
+		echo "<b>Introduction</b> <br/>";
+		echo "-------------------------------------------------------- <br/>";
+		$B->getIntroduction();
+		echo "<br/><br/>";
+	}
+	if(isset($_POST["chapter"]) && $_POST["chapter"] !=null)
+	{
+		foreach($chapters as $chapter)
 		{
-			foreach($chapters as $chapter)
+			if($chapter['code'] == $_POST["chapter"])
 			{
-				if($chapter['code'] == $_POST["chapter"])
-				{
-					// Chapitre
-					echo "<b>Chapitre ".$_POST["chapter"]."</b> <br/>";
-					echo "-------------------------------------------------------- <br/>";
-					echo $chapter->text;
-				}
+				// Chapitre
+				echo "<b>Chapitre ".$_POST["chapter"]."</b> <br/>";
+				echo "-------------------------------------------------------- <br/>";
+				echo $chapter->text;
 			}
 		}
-
 	}
+}
+
 ?>
 </div>
-
-<a href="?p=download&choice=download&id=<?php echo $_GET['id']; ?>">Télécharger</a>
-
-<iframe src="?p=download&choice=consult&id=<?php echo $_GET['id'] ?>" width="100%" height="15%" scrolling=auto frameborder=1></iframe>
+<a href="?p=download&choice=download&id=<?php echo $_GET['id']; ?>&file=<?php echo $f; ?>">Télécharger</a>
+<iframe src="?p=download&choice=consult&id=<?php echo $_GET['id']; ?>&file=<?php echo $f; ?>" width="100%" height="15%" scrolling=auto frameborder=1></iframe>

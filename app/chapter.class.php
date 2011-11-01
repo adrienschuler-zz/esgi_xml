@@ -72,6 +72,7 @@ class Chapter {
 		$chap->addAttribute('status', 2);
 		$chap->addAttribute('created', $date);
 		$chap->addAttribute('modified', $date);
+		$chap->addAttribute('author', $_SESSION['user']['login']);
 		$chap->addChild('imageURL', $_FILES['chap']['name']['image']);
 		$chap->addChild('text', $chapter['text']);
 		$chap->addChild('question', $chapter['question']);
@@ -111,10 +112,6 @@ class Chapter {
 
 		flash_message('success', 'Modification du chapitre <u>' . $chap['code'] . '</u> réussi !');
 		header('Location:?p=update&id='.$_GET['book_id']);
-	}
-
-	function delete($id) {
-		
 	}
 
 }

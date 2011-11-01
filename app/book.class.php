@@ -58,7 +58,6 @@ class Book {
 		$livre = $this->file->addChild('book');
 		$livre->addAttribute('id', uniqid());
 		$livre->addAttribute('title', $book['title']);
-		$livre->addAttribute('status', 2);
 		$livre->addAttribute('author', $_SESSION['user']['login']);
 		$livre->addAttribute('created', $date);
 		$livre->addAttribute('modified', $date);
@@ -159,10 +158,23 @@ class Book {
 		return $idUsedNCreated;	
 	}
 	
-		function getIntroduction() {
+	function getIntroduction() {
 		$intro = $this->file->xpath("//book[@id='".$this->id."']/intro/text");
 		foreach($intro as $node)
 			echo $node;
+	}
+
+	function queryXPATH($query)
+	{
+		$result= $this->file->xpath($query);
+		if(count($result)>0)
+		{
+			$file = 'tmp/resultat.txt';
+			foreach($result as $node)
+					$node->asXML($file);
+			return $file;
+		}else
+			return null;
 	}
 
 }

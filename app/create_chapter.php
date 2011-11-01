@@ -167,24 +167,26 @@ $('#image').bind('change', function() {
 
 function checkNChapter()
 {
-		$.get("?p=export&id="+getUrlParameter('id'), function(xml){
-			$(xml).find('chapter').each( function(){ 
-				var code = $(this).attr('code');
-				if(code==$('#number').val())
-				{
-					$('.alert-message').html('<p><strong>Erreur !</strong> Le chapitre numéro '+code+' est déjà créé.</p><a class="close" href="#">×</a>');
-					$('.alert-message').show();
+	$.get("?p=export&id="+getUrlParameter('id'), function(xml){
+		$(xml).find('chapter').each( function(){ 
+			var code = $(this).attr('code');
+			if(code==$('#number').val())
+			{
+				$('.alert-message')
+					.html('<p><strong>Erreur !</strong> Le chapitre numéro '+code+' est déjà créé.</p><a class="close" href="#">×</a>')
+					.show();
 
-					$('#number_error').removeClass('form_ok');
-					$('#number_error').addClass('form_error');
-					unlockCreation();
-					return true;
-				}
-				else
-				{
-					
-					return false;
-				}
+				$('#number_error')
+					.removeClass('form_ok')
+					.addClass('form_error');
+
+				unlockCreation();
+				return true;
+			}
+			else
+			{
+				return false;
+			}
 		});			
 	});
 }
@@ -202,8 +204,9 @@ function getUrlParameter(name) {
 }
 
 <?php if(isset($_GET['chap'])) : ?>
-	$('#number').trigger('change');
-	$('#number').attr('disabled', 'disabled');
+	$('#number')
+		.trigger('change')
+		.attr('disabled', 'disabled');
 <?php endif; ?>
 
 </script>

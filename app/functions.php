@@ -15,6 +15,8 @@ function display_messages() {
 	  	echo '<a class="close" href="#">×</a>';
 		echo '<p><strong>' . $_SESSION['flash_message']['title'] . '</strong>&nbsp;' . $_SESSION['flash_message']['message'] . '</p></div></div>';
 		unset($_SESSION['flash_message']);
+	} else {
+		echo '<div class="alert-message" style="display:none;"><a class="close" href="#">×</a></div>';
 	}
 }
 
