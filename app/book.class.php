@@ -158,5 +158,11 @@ class Book {
 		$idUsedNCreated=array_unique($parUsedNCreated);
 		return $idUsedNCreated;	
 	}
+	
+		function getIntroduction() {
+		$intro = $this->file->xpath("//book[@id='".$this->id."']/intro/text");
+		foreach($intro as $node)
+			echo $node;
+	}
 
 }

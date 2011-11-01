@@ -43,9 +43,8 @@
 					<td class="center"><?php echo $chapter['created']; ?></td>
 					<td class="center"><?php echo $chapter['modified']; ?></td>
 					<td class="center">
-						<a href="?p=read_chapter&id=<?php echo $chapter['id']; ?>" class="view" title="Consulter"></a>
-						<a href="?p=update_chapter&id=<?php echo $chapter['id']; ?>" class="edit" title="Modifier"></a>
-						<a href="?p=export_chapter&id=<?php echo $chapter['id']; ?>" class="script" title="Exporter le fichier XML" target="_blank"></a>
+						<a href="?p=export_chapter&id=<?php echo $chapter['id']; ?>" class="view" title="Consulter" target="_blank"></a>
+						<a href="?p=update_chapter&id=<?php echo $chapter['id']; ?>" class="edit" title="Modifier"></a>						
 						<a href="?p=delete_chapter&chapter_id=<?php echo $chapter['id']; ?>&book_id=<?php echo $book['id']; ?>" class="delete" title="Supprimer" data-book-id="<?php echo $book['id']; ?>" data-chapter-id="<?php echo $chapter['id']; ?>"></a>
 					</td>
 				</tr>

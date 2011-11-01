@@ -23,6 +23,12 @@ class Chapter {
 
 		$this->chapter['number']=(int)$this->chapter['number'];
 		$target_path = IMAGE_PATH . basename($_FILES['chap']['name']['image']);
+		//Delete old image
+		$id=$_GET['id'];
+		$imgToDel = $this->file->xpath("//*/chapter[@id='$id']");
+		if($imgToDel[0]->imageURL!=""){
+			unlink(IMAGE_PATH .$imgToDel[0]->imageURL); 
+		}
 		if($_FILES['chap']['name']['image']!=""){
 			if(move_uploaded_file($_FILES['chap']['tmp_name']['image'], $target_path)) {
 				echo "The file ".  basename($_FILES['chap']['name']['image']). 
@@ -88,7 +94,23 @@ class Chapter {
 	}
 
 	function update($chapter) {
-		
+		$this->check($chapter);
+		$date = date("Y-m-d H:i:s");
+		$chap = $this->read($_GET['id']);
+		$chap['modified'] = $date;
+		$chap->imageURL = $_FILES['chap']['name']['image'];
+		$chap->text = $chapter['text'];
+		$chap->question = $chapter['question'];
+		$choice = $chap->choice;
+		for($i=0; $i < count($choice->answer); $i++) {
+			$answer = $choice->answer[$i];
+			$answer[0] = $chapter['choixLib'][$i];
+			$answer['ref'] = $chapter['choixRef'][$i];
+		}
+		file_put_contents(XML_FILE, $this->file->asXml());
+
+		flash_message('success', 'Modification du chapitre <u>' . $chap['code'] . '</u> réussi !');
+		header('Location:?p=update&id='.$_GET['book_id']);
 	}
 
 	function delete($id) {

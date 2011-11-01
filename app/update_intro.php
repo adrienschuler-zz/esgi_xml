@@ -25,8 +25,8 @@
 			<span id="intro_error" class=""></span>
 		</p>
 
-		<input type="submit" name="submit" value="Modifier" class="btn primary" disabled="disabled" id="create_but">
 		<a href="?p=update&id=<?php echo $book['id']; ?>" class="btn">Retour</a>
+		<input type="submit" name="submit" value="Modifier" class="btn primary" disabled="disabled" id="create_but">
 
 	</form>
 
