@@ -4,18 +4,6 @@ $book = $book->read($_GET['id']);
 $file = 'tmp/' . $book['title'] . '_' . $book['id'] . '.xml';
 $book->asXML($file);
 $fileTXT = 'tmp/' . $book['title'] . '_' . $book['id'] . '.txt';
-
- // Ouverture du fichier
-$fp = fopen($file, "r");
-$fTxt = fopen($fileTXT, "w+");
- if (!$fp) die("Impossible d'ouvrir le fichier XML");
-    while ($ligneXML = fgets($fp, 1024)) {
-        fputs($fTxt, $ligneXML);
-		echo $ligneXML."<br />";
-	}
-	fclose($fp);
-	fclose($fTxt);
-
 	
 if($_GET['choice']== "download")
 {

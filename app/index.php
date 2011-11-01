@@ -6,6 +6,7 @@
 
 	<link href="http://fonts.googleapis.com/css?family=Rochester" rel="stylesheet">
 	<link href="stylesheets/libs/twitter-bootstrap-1.3/less/bootstrap.less" rel="stylesheet/less" media="all">
+	<link href="stylesheets/libs/prettify.css" rel="stylesheet">
 	<link href="stylesheets/less/styles.less" rel="stylesheet/less" media="all">
 
 	<script src="javascripts/libs/less-1.1.3.min.js"></script>
@@ -15,6 +16,7 @@
 	<script src="javascripts/plugins/jquery.tablesorter.min.js"></script>
 	<script src="javascripts/plugins/twitter-bootstrap-1.3/bootstrap-modal.js"></script>
 	<script src="javascripts/plugins/twitter-bootstrap-1.3/bootstrap-alerts.js"></script>
+	<script src="javascripts/libs/prettify.js"></script>
 </head>
 <body>
 	<!-- nav -->
@@ -62,6 +64,12 @@
 			Adrien SCHULER<br>
 		</p>
 	</footer>
+
+<script>
+	$(function() {
+		prettyPrint();
+	});
+</script>
 
 </body>
 </html>

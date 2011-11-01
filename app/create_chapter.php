@@ -78,18 +78,26 @@ function createFormChoice(nbForm) {
 	var div = $('#formChoiceDiv'),
 		nbFormHere = $("#formChoiceDiv > div").size();
 
-	for(var i = nbFormHere; i < nbForm; i++) {
-		var divFormElement = 	$('<div></div>'),
-			lRef = 				$('<hr><label>Chapitre référencé :</label>'),
-			inputRef = 			$('<input type=text name=chap[choixRef]['+i+'] class="choixRef" id=choixRef'+i+'>'),
-			valid_chapter_ref = $('<span id="choixRef'+i+'_error" class=""></span>'),
-			lLibelle = 			$('<label>Libellé du choix :</label>'),
-			inputLibelle = 		$('<input type=text name=chap[choixLib]['+i+'] class="choixLib" id=choixLib'+i+'>'),
-			valid_ref_lib = 	$('<span id="choixLib'+i+'_error" class=""></span>');
+	if(nbFormHere > nbForm){
+		for(var i = nbForm; i < nbFormHere; i++) {
+			div.children("div:last").remove();
+		}
+	}
+	else {
 
-		div.append(
-			divFormElement.append(lRef, inputRef,valid_chapter_ref, lLibelle, inputLibelle, valid_ref_lib)
-		);
+		for(var i = nbFormHere; i < nbForm; i++) {
+			var divFormElement = 	$('<div></div>'),
+				lRef = 				$('<hr><label>Chapitre référencé :</label>'),
+				inputRef = 			$('<input type=text name=chap[choixRef]['+i+'] class="choixRef" id=choixRef'+i+'>'),
+				valid_chapter_ref = $('<span id="choixRef'+i+'_error" class=""></span>'),
+				lLibelle = 			$('<label>Libellé du choix :</label>'),
+				inputLibelle = 		$('<input type=text name=chap[choixLib]['+i+'] class="choixLib" id=choixLib'+i+'>'),
+				valid_ref_lib = 	$('<span id="choixLib'+i+'_error" class=""></span>');
+
+			div.append(
+				divFormElement.append(lRef, inputRef,valid_chapter_ref, lLibelle, inputLibelle, valid_ref_lib)
+			);
+		}
 	}
 }
 

@@ -22,12 +22,15 @@ class Chapter {
 	function check() {
 
 		$this->chapter['number']=(int)$this->chapter['number'];
-		$target_path = IMAGE_PATH . basename($_FILES['chap']['name']['image']);
-		//Delete old image
 		$id=$_GET['id'];
+		$chap_image =$this->file->xpath("//*/chapter[@id='$id']/ancestor::book");
+		$cover_path = IMAGE_PATH . "livres/" . $chap_image[0]['title'][0] . "/chapter/" . $id . "/";
+		mkdir($cover_path, 0777, true);
+		$target_path = $cover_path . basename($_FILES['chap']['name']['image']);
+		//Delete old image
 		$imgToDel = $this->file->xpath("//*/chapter[@id='$id']");
 		if($imgToDel[0]->imageURL!=""){
-			unlink(IMAGE_PATH .$imgToDel[0]->imageURL); 
+			unlink($cover_path .$imgToDel[0]->imageURL); 
 		}
 		if($_FILES['chap']['name']['image']!=""){
 			if(move_uploaded_file($_FILES['chap']['tmp_name']['image'], $target_path)) {
@@ -82,8 +85,13 @@ class Chapter {
 			$answer = $choice->addChild('answer', $chapter['choixLib'][$i]);
 			$answer->addAttribute('ref', $chapter['choixRef'][$i]);
 		}
-		
-		$this->file->asXML(XML_FILE);
+			
+	 	$dom = new DOMDocument('1.0');
+	 	$dom->preserveWhiteSpace = false;
+	 	$dom->formatOutput = true;
+	 	$dom->loadXML($this->file->asXML());
+	 	$dom->save(XML_FILE);
+		//$this->file->asXML(XML_FILE);
 
 		flash_message('success', 'Le chaptire <u>n° ' . $chapter['number'] . '</u> a bien été créé.', 'Pensez à créer les chaptires qu\'il réfère.');
 		header("Location:?p=update&id=" . $this->book['id']);
@@ -103,15 +111,28 @@ class Chapter {
 		$chap->text = $chapter['text'];
 		$chap->question = $chapter['question'];
 		$choice = $chap->choice;
-		for($i=0; $i < count($choice->answer); $i++) {
-			$answer = $choice->answer[$i];
-			$answer[0] = $chapter['choixLib'][$i];
-			$answer['ref'] = $chapter['choixRef'][$i];
+
+		//clean choice
+		$domRef = dom_import_simplexml($choice); 
+	    $domRef->parentNode->removeChild($domRef);
+		$choice = $chap->addChild('choice');
+		for($i=0; $i < sizeof($chapter['choixRef']); $i++) {
+			$answer = $choice->addChild('answer', $chapter['choixLib'][$i]);
+			$answer->addAttribute('ref', $chapter['choixRef'][$i]);
 		}
-		file_put_contents(XML_FILE, $this->file->asXml());
+	 	$dom = new DOMDocument('1.0');
+	 	$dom->preserveWhiteSpace = false;
+	 	$dom->formatOutput = true;
+	 	$dom->loadXML($this->file->asXML());
+	 	$dom->save(XML_FILE);
+		//file_put_contents(XML_FILE, $this->file->asXml());
 
 		flash_message('success', 'Modification du chapitre <u>' . $chap['code'] . '</u> réussi !');
 		header('Location:?p=update&id='.$_GET['book_id']);
+	}
+
+	function delete($id) {
+		
 	}
 
 }

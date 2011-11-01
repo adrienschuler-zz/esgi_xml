@@ -16,11 +16,13 @@ class Book {
 	}
 
 	function check($book) {
-		$target_path = IMAGE_PATH . basename($_FILES['book']['name']['image']);
+		$cover_path = IMAGE_PATH . "livres/" . $book['title'] . "/cover/";
+		mkdir($cover_path, 0777, true);
+		$target_path = $cover_path . basename($_FILES['book']['name']['image']);
 		//Delete old image
 		$imgToDel = $this->file->xpath("book[@id='$this->id']/intro/imageURL");
 		if($imgToDel[0][0]!=""){
-			unlink(IMAGE_PATH .$imgToDel[0][0]); 
+			unlink($cover_path .$imgToDel[0][0]); 
 		}
 		if($_FILES['book']['name']['image']!=""){
 			if(move_uploaded_file($_FILES['book']['tmp_name']['image'], $target_path)) {
@@ -66,7 +68,12 @@ class Book {
 		$intro->addChild('imageURL', $_FILES['book']['name']['image']);
 		$intro->addChild('text', $book['intro']);
 		
-		$this->file->asXML(XML_FILE);
+ 		$dom = new DOMDocument('1.0');
+	 	$dom->preserveWhiteSpace = false;
+	 	$dom->formatOutput = true;
+	 	$dom->loadXML($this->file->asXML());
+	 	$dom->save(XML_FILE);
+		//$this->file->asXML(XML_FILE);
 
 		flash_message('success', 'Création du livre <u>' . $book['title'] . '</u> réussi !', 'Vous pouvez dès à présent le compléter via le bouton d\'édition (<span class="edit"></span>).');
 		header('Location:?p=admin');
@@ -93,7 +100,12 @@ class Book {
 				break;
 			}
 		}
-		file_put_contents(XML_FILE, $this->file->asXml());
+	 	$dom = new DOMDocument('1.0');
+	 	$dom->preserveWhiteSpace = false;
+	 	$dom->formatOutput = true;
+	 	$dom->loadXML($this->file->asXML());
+	 	$dom->save(XML_FILE);
+		//file_put_contents(XML_FILE, $this->file->asXml());
 
 		flash_message('success', 'Modification du livre <u>' . $book['title'] . '</u> réussi !');
 		header('Location:?p=update&id='.$this->id);
@@ -157,7 +169,7 @@ class Book {
 		$idUsedNCreated=array_unique($parUsedNCreated);
 		return $idUsedNCreated;	
 	}
-	
+
 	function getIntroduction() {
 		$intro = $this->file->xpath("//book[@id='".$this->id."']/intro/text");
 		foreach($intro as $node)

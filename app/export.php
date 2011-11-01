@@ -9,37 +9,26 @@ $chapters = $B->getChapters();
 
 <div class="box-center">
 
-	<form method="post" action="#" enctype="multipart/form-data" value="8000000">
-	
-		<p>
-			<label> XPATH
-			<input type="text" name="xpath" style="width:250px;">
-			</label>
-		</p>
-		<p>
-			<label>Consulter l'indroduction ?
+	<form method="post" action="#">
+
+		<p>	
+			<label style="display:inline;">Consulter l'introduction</label>
 			<input type="checkbox" name="introduction">
-			</label>
 		</p>
 		<p>
-				<label>Consulter un chapitre</label>
-				<select name="chapter">
-					<option value="">-</option>
-					<?php foreach ($chapters as $chapter)
-							echo '<option value="'.$chapter['code'].'">'.$chapter['code'].'</option>';						
-					?>
-				</select>
-				<div id="formChoiceDiv"></div>
+			<label style="display:inline;">Consulter un chapitre</label>
+			<select name="chapter">
+				<option value="">-</option>
+				<?php foreach ($chapters as $chapter)
+						echo '<option value="'.$chapter['code'].'">'.$chapter['code'].'</option>';						
+				?>
+			</select>
 		</p>
 		
-		<div class="well">
-			<input type="submit" name="submit" value="Afficher" class="btn primary" id="create_but">
-			<a href="?p=admin" class="btn">Retour</a>
-			
-		</div>
+		<input type="submit" name="submit" value="Afficher" class="btn primary" id="create_but">
 	</form>
 </div>
-<p class="content"> <b>Résultat :</b> </p>
+
 <div id="divResult">
 <?php
 $f="";
@@ -83,5 +72,30 @@ if (isset($_POST['submit'])) {
 
 ?>
 </div>
-<a href="?p=download&choice=download&id=<?php echo $_GET['id']; ?>&file=<?php echo $f; ?>">Télécharger</a>
-<iframe src="?p=download&choice=consult&id=<?php echo $_GET['id']; ?>&file=<?php echo $f; ?>" width="100%" height="15%" scrolling=auto frameborder=1></iframe>
+
+<br>
+
+<form method="post" action="#">
+	<p>
+		<input type="text" name="xpath" placeholder="Tapez une requête XPATH">
+		<input type="submit" name="submit" value="Afficher" class="btn primary" id="create_but">
+	</p>
+</form>
+
+<pre class="prettyprint">
+<?php
+if (!empty($f)) {
+	echo htmlspecialchars(file_get_contents($f)); 
+} 
+?>
+</pre>
+
+<!--
+<iframe src="?p=download&choice=consult&id=<?php echo $_GET['id']; ?>&file=<?php echo $f; ?>" width="100%" height="100%" scrolling=auto frameborder=1></iframe>
+-->
+
+<a href="?p=download&choice=download&id=<?php echo $_GET['id']; ?>&file=<?php echo $f; ?>" class="btn success">Télécharger</a><br><br>
+
+<div class="well">
+	<a href="?p=admin" class="btn">Retour</a>
+</div>
