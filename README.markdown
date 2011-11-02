@@ -12,8 +12,6 @@ Projet XML - 5PPA AL
 * Supprimer un livre
 * Supprimer un chapitre
 
-***
-
 ## L’interface d’administration se présente comme suit :
 
 Tableau contenant la liste des livres créés avec :
@@ -24,8 +22,6 @@ Tableau contenant la liste des livres créés avec :
 * Date de modification
 * Statut indiquant si des chapitres restes à créer (chapitres référencés mais non créés)
 * Actions : Consulter, modifier, exporter, supprimer
-
-***
 
 ## Interface de consultation des livres :
 
@@ -46,20 +42,21 @@ Tableau contenant la liste des numéros de chapitres restant à créer (Car réf
 Numéro du chapitre
 Bouton créer
 
-***
-
 ## Outils utilisés :
 
 ### PHP
 ### SimpleXML/XPATH : Création des livres, utilisateurs, fonctions de recherche, Consultation, suppression
 ### HTML/CSS/JavaScript
-* http://jquery.com/
-* http://twitter.github.com/bootstrap/
-* http://lesscss.org/
-* http://www.google.com/webfonts
-* http://code.google.com/p/google-code-prettify/
 ### Format XML
 #### Livres
 #### Module de gestion des droits
 ### Versionning
 * Git + Github
+
+Plus:
+
+* http://jquery.com/
+* http://twitter.github.com/bootstrap/
+* http://lesscss.org/
+* http://www.google.com/webfonts
+* http://code.google.com/p/google-code-prettify/
