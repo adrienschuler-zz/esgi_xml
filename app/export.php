@@ -12,12 +12,12 @@ $chapters = $B->getChapters();
 	<form method="post" action="#">
 
 		<p>	
-			<label style="display:inline;">Consulter l'introduction</label>
-			<input type="checkbox" name="introduction">
+			<label for="introduction" style="display:inline;">Consulter l'introduction</label>
+			<input type="checkbox" name="introduction" id="introduction">
 		</p>
 		<p>
-			<label style="display:inline;">Consulter un chapitre</label>
-			<select name="chapter">
+			<label for="chapter" style="display:inline;">Consulter un chapitre</label>
+			<select name="chapter" id="chapter">
 				<option value="">-</option>
 				<?php foreach ($chapters as $chapter)
 						echo '<option value="'.$chapter['code'].'">'.$chapter['code'].'</option>';						
@@ -46,7 +46,7 @@ if (isset($_POST['submit'])) {
 		{
 			echo 'Aucun résultat trouvé.';
 		}
-	}	
+	}
 	if(isset($_POST["introduction"]))
 	{
 		// Introduction
@@ -82,13 +82,11 @@ if (isset($_POST['submit'])) {
 	</p>
 </form>
 
-<pre class="prettyprint">
 <?php
 if (!empty($f)) {
-	echo htmlspecialchars(file_get_contents($f)); 
+	echo '<pre class="prettyprint">' . htmlspecialchars(file_get_contents($f)) . '</pre>'; 
 } 
 ?>
-</pre>
 
 <!--
 <iframe src="?p=download&choice=consult&id=<?php echo $_GET['id']; ?>&file=<?php echo $f; ?>" width="100%" height="100%" scrolling=auto frameborder=1></iframe>

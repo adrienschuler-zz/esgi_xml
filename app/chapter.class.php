@@ -72,7 +72,6 @@ class Chapter {
 		$chap = $currentBook[0]->addChild('chapter');
 		$chap->addAttribute('code', $chapter['number']);
 		$chap->addAttribute('id', uniqid());
-		$chap->addAttribute('status', 2);
 		$chap->addAttribute('created', $date);
 		$chap->addAttribute('modified', $date);
 		$chap->addAttribute('author', $_SESSION['user']['login']);

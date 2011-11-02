@@ -59,14 +59,14 @@ class Book {
 
 		$livre = $this->file->addChild('book');
 		$livre->addAttribute('id', uniqid());
-		$livre->addAttribute('title', $book['title']);
+		$livre->addAttribute('title', htmlspecialchars($book['title'], ENT_QUOTES));
 		$livre->addAttribute('author', $_SESSION['user']['login']);
 		$livre->addAttribute('created', $date);
 		$livre->addAttribute('modified', $date);
 
 		$intro = $livre->addChild('intro');
 		$intro->addChild('imageURL', $_FILES['book']['name']['image']);
-		$intro->addChild('text', $book['intro']);
+		$intro->addChild('text', htmlspecialchars($book['intro'], ENT_QUOTES));
 		
  		$dom = new DOMDocument('1.0');
 	 	$dom->preserveWhiteSpace = false;
@@ -173,17 +173,22 @@ class Book {
 	function getIntroduction() {
 		$intro = $this->file->xpath("//book[@id='".$this->id."']/intro/text");
 		foreach($intro as $node)
-			echo $node;
+			echo htmlspecialchars($node);
 	}
 
 	function queryXPATH($query)
 	{
-		$result= $this->file->xpath($query);
+		$file = 'tmp/'.uniqid().'.txt';
+		$handle = fopen($file, 'w+');
+		$result = $this->file->xpath($query);
+
 		if(count($result)>0)
 		{
-			$file = 'tmp/resultat.txt';
-			foreach($result as $node)
-					$node->asXML($file);
+			foreach($result as $node) {
+				fwrite($handle, "\n" . $node->asXML());
+			}
+			fclose($handle);
+
 			return $file;
 		}else
 			return null;

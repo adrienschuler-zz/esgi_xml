@@ -42,7 +42,7 @@
 		<?php else : ?>
 			<?php foreach ($chapters as $chapter) : ?>
 				<tr>
-					<td class="center">#<?php echo $chapter['code']; ?></td>
+					<td class="center"><?php echo $chapter['code']; ?></td>
 					<td class="center"><?php echo $chapter['author']; ?></td>
 					<td class="center">
 						<?php 

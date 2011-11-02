@@ -53,7 +53,7 @@
 					<td class="center">
 						<a href="?p=export&choice=consult&id=<?php echo $book['id']; ?>" class="view" title="Consulter"></a>
 						<a href="?p=update&id=<?php echo $book['id']; ?>" class="edit" title="Modifier"></a>
-						<a href="?p=download&choice=download&id=<?php echo $book['id']; ?>" class="script" title="Exporter le fichier XML" target="_blank"></a>
+						<a href="?p=download&choice=download&id=<?php echo $book['id']; ?>" class="script" title="Exporter le fichier XML"></a>
 						<a href="?p=delete&id=<?php echo $book['id']; ?>" class="delete" title="Supprimer" data-id="<?php echo $book['id']; ?>" data-author="<?php echo $book['author']; ?>"></a>
 					</td>
 				</tr>

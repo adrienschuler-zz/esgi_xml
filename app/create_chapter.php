@@ -13,8 +13,6 @@
 
 	<form method="post" action="?p=create_chapter&id=<?php echo $book['id']; ?>" enctype="multipart/form-data" value="8000000">
 
-		<div class="alert-message error" style="display:none;"></div>
-
 		<p>
 			<label for="number">Numéro du chapitre</label>
 			<input type="text"  onchange="checkNChapter();" name="chap[number]" id="number" value="<?php if (isset($_GET['chap'])) echo $_GET['chap']; ?>">
@@ -175,13 +173,17 @@ $('#image').bind('change', function() {
 
 function checkNChapter()
 {
-	$.get("?p=export&id="+getUrlParameter('id'), function(xml){
-		$(xml).find('chapter').each( function(){ 
+	var bool = true;
+	$.get("?p=download&choice=download&id="+getUrlParameter('id'), function(xml){
+		$(xml).find('chapter').each(function(){ 
 			var code = $(this).attr('code');
-			if(code==$('#number').val())
+			if(code == $('#number').val())
 			{
+				bool = false;
 				$('.alert-message')
 					.html('<p><strong>Erreur !</strong> Le chapitre numéro '+code+' est déjà créé.</p><a class="close" href="#">×</a>')
+					.removeClass('warning')
+					.addClass('error')
 					.show();
 
 				$('#number_error')
@@ -189,13 +191,11 @@ function checkNChapter()
 					.addClass('form_error');
 
 				unlockCreation();
-				return true;
 			}
-			else
-			{
-				return false;
-			}
-		});			
+		});
+		if (bool) {
+			$('.alert-message').hide();
+		}		
 	});
 }
 
