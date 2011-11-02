@@ -1,21 +1,21 @@
-#Projet XML
+# Projet XML
 
 ***
 
-##Liste des fonctionnalités implémentées :
+## Liste des fonctionnalités implémentées :
 
-###Inscription
-###Connexion
-###Création des livres 
-###Création des chapitres
-###Consultation des livres (introduction, chapitres, requête XPATH)
-###Exporter un livre au format TXT
-###Supprimer un livre
-###Supprimer un chapitre
+### Inscription
+### Connexion
+### Création des livres 
+### Création des chapitres
+### Consultation des livres (introduction, chapitres, requête XPATH)
+### Exporter un livre au format TXT
+### Supprimer un livre
+### Supprimer un chapitre
 
 ***
 
-##L’interface d’administration se présente comme suit :
+## L’interface d’administration se présente comme suit :
 
 Tableau contenant la liste des livres créés avec :
 Titre
@@ -27,7 +27,7 @@ Actions : Consulter, modifier, exporter, supprimer
 
 ***
 
-##Interface de consultation des livres :
+## Interface de consultation des livres :
 
 Formulaire permettant de spécifier ce que l’on veut consulter :
 Introduction
@@ -48,18 +48,18 @@ Bouton créer
 
 ***
 
-##Outils utilisés :
+## Outils utilisés :
 
-###PHP
-###SimpleXML/XPATH : Création des livres, utilisateurs, fonctions de recherche, Consultation, suppression
-###HTML/CSS/JavaScript
-####http://jquery.com/
-####http://twitter.github.com/bootstrap/
-####http://lesscss.org/
-####http://www.google.com/webfonts
-####http://code.google.com/p/google-code-prettify/
-###Format XML
-####Livres
-####Module de gestion des droits
-###Versionning
-####Git + Github
+### PHP
+### SimpleXML/XPATH : Création des livres, utilisateurs, fonctions de recherche, Consultation, suppression
+### HTML/CSS/JavaScript
+#### http://jquery.com/
+#### http://twitter.github.com/bootstrap/
+#### http://lesscss.org/
+#### http://www.google.com/webfonts
+#### http://code.google.com/p/google-code-prettify/
+### Format XML
+#### Livres
+#### Module de gestion des droits
+### Versionning
+#### Git + Github
